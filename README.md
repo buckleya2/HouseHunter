@@ -7,6 +7,8 @@ I collected data from all single family homes in Gig Harbor, WA and built a SQLi
 
 I pulled parcel map data in JSON format from the same website  to build the plots
 
+## Changelog
+
 - 10/30/2022: inital commit of basic website
 
 ## Finding Information by Address
