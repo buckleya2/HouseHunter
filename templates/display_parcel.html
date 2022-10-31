@@ -1,0 +1,70 @@
+
+<! doctype html>
+<html>
+{% extends 'base.html' %}
+{% block title %}{{ site_address }} {{ parcel_number }}{% endblock %} 
+{% block content %} 
+
+<div class="wrapper">
+    <div class="header"><h1> {{ site_address }} ({{ parcel_number }})</h1>
+    <a href="{{ 'https://atip.piercecountywa.gov/app/propertyDetail/' ~ parcel_number ~ '/summary' }}" 
+    target="_blank" >Pierce County GIS Link</a></div>
+    <div class="plot1">           
+        <div id="chart" class="chart"></div>
+          <script src='https://cdn.plot.ly/plotly-latest.min.js'></script>
+          <script type='text/javascript'>
+            var graphs = {{ map_plot | safe }};
+            Plotly.plot('chart', graphs, {});
+          </script>
+          <br>
+          Plot of all neghborhood parcels, dot indicates selected parcel
+          </div>
+    <div class="plot2">
+        <div id="chart2" class="chart2"></div>
+          <script src='https://cdn.plot.ly/plotly-latest.min.js'></script>
+          <script type='text/javascript'>
+            var graphs = {{ tax_plot | safe }};
+            Plotly.plot('chart2', graphs, {});
+        </script></div>
+    <div class="text1">
+        <h2>Neighborhood Comparison</h2>
+        Shows data about selected parcel relative to other parcels in its census neighborhood
+        <br>
+        <br>
+        <table class="display_table">
+            <tr>
+                <th>Metric</th>
+                <th>Parcel Value</th>
+                <th>Neighborhood<br>z-score</th>
+            </tr>
+            {% for key, value in z_dict.items() %}
+            <tr>
+                <td>{{ key }}</td>
+              {% for i in value %}
+              {% if i|float < 0.0 %}
+                <td bgcolor="red">{{ i }}</td>
+                {% else %} 
+                <td>{{ i }}</td>               
+                {% endif%}
+              {% endfor %}
+            </tr> 
+            {% endfor %}   
+        </table>
+    </div>
+    <div class="text2">
+      <h2>Previous Sale</h2>
+      Shows data about most recent sale, if applicable
+      <br>
+      <br>
+      <table class="display_table">
+        {% for key, value in sale_dict.items() %}
+        <tr>
+            <td>{{ key }}</td>
+            <td>{{ value }}</td>
+        </tr> 
+        {% endfor %}   
+    </table>
+</div>
+
+  {% endblock %}
+  </html>
