@@ -3,9 +3,13 @@
 HouseHunter is a flask web app I created to compile and present data scraped from publicly available
 [Pierce County property records](https://atip.piercecountywa.gov/app/parcelSearch/search).
 
-I collected data from all single family homes in Gig Harbor, WA and built a SQLite database locally (propertydb.db)
+[HosueHunter](https://buckleya2.pythonanywhere.com/)
 
-I pulled parcel map data in JSON format from the same website  to build the plots
+I collected data from all single family homes in Gig Harbor, WA and built a SQLite database
+
+I pulled parcel map data in JSON format from the same website to build the plots
+
+Site is hosted on pythonanywhere
 
 ## Changelog
 
