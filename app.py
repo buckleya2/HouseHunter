@@ -13,7 +13,7 @@ from helpers import *
 
 app = Flask(__name__, static_folder = 'static')
 app.config['SQLALCHEMY_DATABASE_URI'] = "sqlite:////Users/abuckley/Documents/flask/data/sqllite/propertydb.db"
-app.config['SECRET_KEY'] = ''
+app.config['SECRET_KEY'] = '7efce7af669eed5d0e1b32cf48d1d243c7d8bec2ab9e2c40'
 
 db.init_app(app)
 

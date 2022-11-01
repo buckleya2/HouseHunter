@@ -25,24 +25,30 @@
           <script type='text/javascript'>
             var graphs = {{ tax_plot | safe }};
             Plotly.plot('chart2', graphs, {});
-        </script></div>
+        </script>
+          <br>
+            Plot of historical tax assessment values
+          </div>
     <div class="text1">
-        <h2>Neighborhood Comparison</h2>
-        Shows data about selected parcel relative to other parcels in its census neighborhood
+
         <br>
         <br>
-        <table class="display_table">
+        <table class="display_table", style="background-color:white">
+          <tr>
+          <th colspan="3"><h2>Neighborhood Comparison</h2><br>
+            Shows data about selected parcel relative to other parcels in its census neighborhood<br></th>
+          </tr>
             <tr>
-                <th>Metric</th>
-                <th>Parcel Value</th>
-                <th>Neighborhood<br>z-score</th>
+                <td>Metric</td>
+                <td>Parcel Value</td>
+                <td>Neighborhood<br>z-score</td>
             </tr>
             {% for key, value in z_dict.items() %}
             <tr>
                 <td>{{ key }}</td>
               {% for i in value %}
               {% if i|float < 0.0 %}
-                <td bgcolor="red">{{ i }}</td>
+                <td><span style="color:red;">{{ i }}</span></td>
                 {% else %} 
                 <td>{{ i }}</td>               
                 {% endif%}
@@ -52,7 +58,7 @@
         </table>
     </div>
     <div class="text2">
-      <h2>Previous Sale</h2>
+      <h2>Previous Sales</h2>
       Shows data about most recent sale, if applicable
       <br>
       <br>
