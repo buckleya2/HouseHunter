@@ -48,9 +48,10 @@ def sales_stats(parcel_number: str) -> dict:
     @returns: dict of attribute: parcel value for sales stats
     """
     sales = filter_table(sale_history, {'parcel_number': parcel_number})
+    print(sales.sale_date)
     # get only most recent sale
     sales = sales[sales.sale_number	 == 'First']
-    if pd.isnull(sales.sale_date.item()):
+    if len(sales.sale_date) == 0:
         return {'last sold' : 'no record of sales'}
     years_since_sold = round((datetime.datetime.now() - pd.to_datetime(sales.sale_date.item())).days/365, 2)
     # create dict of sale metrics
