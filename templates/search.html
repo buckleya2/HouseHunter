@@ -1,5 +1,56 @@
 {% extends 'base.html' %}
 {% block title %}Search{% endblock %}
 {% block content %}
-<h1 style="color: #000000; text-align: center;">Coming Soon!</h1>
+<h1 style="color: #000000; text-align: center;">Search by Property Characteristics</h1>
+
+<form method="POST" action="">
+    <table class="display_table">
+        <tr>
+          <td colspan="2">Estimated Price</td>
+          <td>Min {{ form.min_taxable_value(size = 100) }}</td>
+          <td>Max {{ form.max_taxable_value(size = 100) }}</td>
+        </tr>
+        <tr>
+            <td colspan="2">Number Bedrooms</td>
+            <td>{{ form.csrf_token }}
+                Min {{ form.min_bedrooms(size = 40) }}</td>
+            <td>Max {{ form.max_bedrooms(size = 40) }}</td>
+        </tr>
+        <tr>
+            <td colspan="2">Number Bathrooms</td>
+            <td>Min {{ form.min_bathrooms(size = 40) }}</td>
+            <td>Max {{ form.max_bathrooms(size = 40) }}</td>
+        </tr>
+        <tr>
+            <td colspan="2">Square Feet</td>
+            <td>Min {{ form.min_square_feet(size = 100) }}</td>
+            <td>Max {{ form.max_square_feet(size = 100) }}</td>
+        </tr>
+        <tr>
+            <td colspan="2">Lot Size (Acres)</td>
+            <td>Min {{ form.min_land_acres(size = 3) }}</td>
+            <td>Max {{ form.max_land_acres(size = 3) }}</td>
+        </tr>
+        <tr>
+            <td colspan="2">Stories</td>
+            <td>Min {{ form.min_stories() }}</td>
+            <td>Max {{ form.max_stories() }}</td>
+        </tr>
+        <tr>
+            <td colspan="2">Year Built</td>
+            <td>Min {{ form.min_year_built(size = 100) }}</td>
+            <td>Max {{ form.max_year_built(size = 100) }}</td>
+        </tr>
+        <tr>
+            <td colspan="2">Year Last Sold</td>
+            <td>Min {{ form.min_last_sold_year(size = 100) }}</td>
+            <td>Max {{ form.max_last_sold_year(size = 100) }}</td>
+        </tr>
+        <tr>
+            <td colspan="4">
+                <input type="submit" name="Search" value="search" class="big_submit">
+            </td>
+        </tr>
+    </table>
+</form>
 {% endblock %}

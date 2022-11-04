@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+{% block title %}Results{% endblock %}
+{% block content %}
+
+{% if msg is defined %}
+<p style="color: #000000; text-align: center; margin-left: 20%; margin-right: 20%">{{ msg }}
+<a style="color: #e91d77;" href="{{ url_for('search') }}">Search Here</a></p>
+{% endif %}
+
+<h1 style="color: #000000; text-align: center;">Search Results</h1>
+<h2 style="color: #000000; text-align: center;">Your search returned {{ pagination.total }} Houses</h2>
+
+
+
+<table class="minimal_table">
+        <tr>
+            <th>Site Address</th>
+            <th>Parcel Link</th>
+            <th>Taxable Value</th>
+            <th>Bedrooms</th>
+            <th>Bathrooms</th>
+            <th>Square Feet</th>
+            <th>Acres</th>
+            <th>Stories</th>
+            <th>Year Built</th>
+            <th>Last Sold</th>
+        </tr>
+        {% for house in pagination.items %}
+        <tr>
+            <td>{{ house.site_address }}</td>
+            <td><a style="color: #e91d77;" 
+                 href="{{ url_for('render_parcel', parcel_number = house.parcel_number) }}">{{ house.parcel_number }}</a></td>
+            <td>{{ house.taxable_value }}</td>
+            <td>{{ house.bedrooms }}</td>
+            <td>{{ house.bathrooms }}</td>
+            <td>{{ house.square_feet }}</td>
+            <td>{{ house.land_acres }}</td>
+            <td>{{ house.stories }}</td>
+            <td>{{ house.year_built }}</td>
+            <td>{{ house.last_sold_year }}</td>
+        </tr>
+        {% endfor %}
+</table>
+<br>
+<br>
+<a href="{{ url_for('search_res', page = pagination.prev_num) }}" class="page_button
+    {% if pagination.page == 1 %}disabled{% endif %}">&laquo;</a>
+
+{% for page_num in pagination.iter_pages(left_edge=1, right_edge=1, left_current=1, right_current=2) %}
+  {% if page_num %}
+    {% if pagination.page == page_num %}
+      <a href="{{ url_for('search_res', page = page_num) }}" class="page_button_active">{{ page_num }}</a>
+    {% else %}
+      <a href="{{ url_for('search_res', page = page_num) }}" class="page_button">{{ page_num }}</a>
+    {% endif %}
+  {% else %} ...
+  {% endif %}
+{% endfor %}
+  <a href="{{ url_for('search_res', page = pagination.next_num) }}" class="page_button
+       {% if pagination.page == pagination.pages %}disabled{% endif %}">&raquo;</a>
+Showing page {{ pagination.page }} of {{ pagination.pages }}
+{% endblock %}

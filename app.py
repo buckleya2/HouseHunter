@@ -60,16 +60,27 @@ def render_parcel(parcel_number):
 @app.route('/about')
 def about():
     return render_template('about.html')
-    
+
 @app.route('/search', methods = ['GET', 'POST'])
 def search():
-    # TODO search property data by atttributes
-    return render_template('search.html')
+    # clear any prior searches
+    session.pop('searchdict', None)
+    form = SearchForm()
+    if form.validate_on_submit():
+        searchdict = form.data
+        searchdict.pop('csrf_token')
+        session['searchdict'] = searchdict
+        return redirect(url_for('search_res'))
+    return render_template('search.html', form = form)
 
 @app.route('/result', methods = ['GET', 'POST'])
 def search_res():
-    # TODO display attribute search results
-    return None
+    if not session.get('searchdict'):
+        msg = 'no search data'
+        return render_template('pages.html', msg = msg)
+    page = request.args.get('page', 1, type=int)
+    pagination = filter_properties(session['searchdict'], page)
+    return render_template('pages.html', pagination = pagination)
 
 @app.errorhandler(404)
 def page_not_found(error):

@@ -34,13 +34,26 @@ li a:hover {
 
 a:link {
     color: #ffffff;
-    background-color: transparent;
     text-decoration: none;
 }
 a:visited {
     color:  #ea4089;
-    background-color: transparent;
     text-decoration: none;
+}
+.page_button {
+    border-radius: 4px;
+    padding: 5px 5px;
+    font-size: 15px;
+    border: none;
+    background-color: #404040;
+}
+
+.page_button_active {
+    border-radius: 4px;
+    padding: 5px 5px;
+    font-size: 15px;
+    border: none;
+    background-color: #000;
 }
 
 .invisible_table {
@@ -53,7 +66,6 @@ a:visited {
     list-style: none;
     background-color: #ffffff;
     list-style-type: none;
-    list-style: none;
     padding: 10px 10px;
 }
 
@@ -70,6 +82,16 @@ a:visited {
     list-style-type: none;
     list-style: none;
     padding: 20px 20px;
+}
+.minimal_table, th, tr, td {
+    border-collapse: collapse;
+    border: 1px solid;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    background-color: #ffffff;
+    list-style-type: none;
+    padding: 10px 10px;
 }
 
 .display_table {

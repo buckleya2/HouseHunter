@@ -212,3 +212,28 @@ def get_list(table, column: str) -> list:
         return sorted(uniq, key = str.lower)
     except:
         return []
+
+
+
+def filter_properties(searchdict: dict, page: int):
+    """
+    Function to take user-entered paramteres from SearchForm() and query sqllite property database
+
+    @param searchdict: dict of data from SearchForm()
+    @param page: integer to indicate what page to start from
+    @returns: flask-sqlalchmeny pagination object
+    """
+    # map max and min to operators
+    mapping = {'max': '<=', 'min': '>='}
+    # initalize a list of filters
+    filters = []
+    for col, searchval in searchdict.items():
+        if searchval:
+            operator = mapping.get(col.split('_')[0])
+            column = '_'.join(col.split('_')[1:])
+            search = f'%{text}%'
+            filters.append(text(f'{getattr(property_data, column)} {operator} {searchval}'))
+    page_obj = db.session.query(property_data).\
+               where(and_(*filters)).paginate(page = page, per_page = 15)
+    return page_obj
+

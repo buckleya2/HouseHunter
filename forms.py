@@ -1,6 +1,6 @@
 from flask_wtf import FlaskForm
 from sqlalchemy import create_engine
-from wtforms import BooleanField, DateField, FloatField, IntegerField, IntegerRangeField, PasswordField, StringField
+from wtforms import FloatField, IntegerField, PasswordField, SelectField, StringField
 from wtforms.validators import InputRequired, NumberRange, Optional, Regexp, Length, ValidationError
 
 from config import *
@@ -27,15 +27,19 @@ class AddressForm(FlaskForm):
     parcel = StringField(id = 'parcel', label = 'parcel')
 
 class SearchForm(FlaskForm):
-    estimated_price = IntegerRangeField(id = 'estimated_price', label = 'estimated_price',
-                                   validators = [Optional(), NumberRange(0, 8000000)])
-    number_bed = IntegerField(id = 'number_bed', label = 'number_bed',
-                        validators = [Optional(), NumberRange(0, 10)])
-    number_bath = IntegerField(id = 'number_bath', label = 'number_bath',
-                        validators = [Optional(), NumberRange(0, 10)])
-    sqft = IntegerField(id = 'sqft', label = 'sqft',
-                        validators = [Optional(), NumberRange(0, 20000)])
-    lot_size = FloatField(id = 'lot_size', label = 'lot_size',
-                        validators = [Optional(), NumberRange(0, 100)])
-
-
+    min_taxable_value = IntegerField(label = 'min_taxable_value', validators = [Optional(), NumberRange(0, 8000000)])
+    min_bedrooms = IntegerField(label = 'min_bedrooms', validators = [Optional(), NumberRange(0, 10)])
+    min_bathrooms = IntegerField(label = 'min_bathrooms', validators = [Optional(), NumberRange(0, 10)])
+    min_square_feet = IntegerField(label = 'min_square_feet', validators = [Optional(), NumberRange(0, 20000)])
+    min_land_acres = FloatField(label = 'min_land_acres', validators = [Optional(), NumberRange(0, 100)])
+    min_stories = SelectField(label = 'min_stories', choices = ['', '1', '2', '3'])
+    min_year_built = IntegerField(label = 'min_year_built', validators = [Optional(), NumberRange(0, 3000)])
+    min_last_sold_year = IntegerField(label = 'min_last_sold_year', validators = [Optional(), NumberRange(0, 3000)])
+    max_taxable_value = IntegerField(label = 'max_taxable_value', validators = [Optional(), NumberRange(0, 8000000)])
+    max_bedrooms = IntegerField(label = 'max_bedrooms', validators = [Optional(), NumberRange(0, 10)])
+    max_bathrooms = IntegerField(label = 'max_bathrooms', validators = [Optional(), NumberRange(0, 10)])
+    max_square_feet = IntegerField(label = 'max_square_feet', validators = [Optional(), NumberRange(0, 20000)])
+    max_land_acres = FloatField(label = 'max_land_acres', validators = [Optional(), NumberRange(0, 100)])
+    max_stories = SelectField(label = 'max_stories', choices = ['', '1', '2', '3'])
+    max_year_built = IntegerField(label = 'max_year_built', validators = [Optional(), NumberRange(0, 3000)])
+    max_last_sold_year = IntegerField(label = 'max_last_sold_year', validators = [Optional(), NumberRange(0, 3000)])
