@@ -17,18 +17,27 @@ app.config['SECRET_KEY'] = '7efce7af669eed5d0e1b32cf48d1d243c7d8bec2ab9e2c40'
 
 db.init_app(app)
 
-@app.route('/', methods = ['GET', 'POST'])
-def find_single():
+@app.route('/')
+def index():
+    return render_template('landing.html')
+
+@app.route('/single', methods = ['GET', 'POST'])
+def single():
     form = AddressForm()
     address_list = get_list(property_data, 'site_address')
     parcel_list = get_list(property_data, 'parcel_number')
     if form.validate_on_submit():
         if request.form['address']:
             site_address = request.form['address']
+            # test if address is in dataset
+            if site_address not in address_list:
+                msg = 'Address entered is not in dataset, please select from dropdown options'
+                return render_template('find_single.html', form = form, address_list = address_list,
+                                        parcel_list = parcel_list, msg = msg)
             parcel_number = filter_table(property_data, {'site_address': site_address}).parcel_number.item()
         return redirect(url_for('render_parcel', parcel_number = parcel_number))
-    return render_template('find_single.html', form = form,
-                     address_list = address_list, parcel_list = parcel_list)
+    return render_template('find_single.html', form = form, address_list = address_list,
+                            parcel_list = parcel_list)
 
 
 @app.route('/parcel/<parcel_number>', methods = ['GET', 'POST'])
@@ -48,10 +57,14 @@ def render_parcel(parcel_number):
     return render_template('display_parcel.html', parcel_number = parcel_number, site_address = site_address, 
                            z_dict = z_dict, sale_dict = sale_dict, map_plot = map_plot, tax_plot = tax_plot)
 
-@app.route('/searchmulti', methods = ['GET', 'POST'])
-def find_multi():
+@app.route('/about')
+def about():
+    return render_template('about.html')
+    
+@app.route('/search', methods = ['GET', 'POST'])
+def search():
     # TODO search property data by atttributes
-    return None
+    return render_template('search.html')
 
 @app.route('/result', methods = ['GET', 'POST'])
 def search_res():

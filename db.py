@@ -35,6 +35,3 @@ class tax_history(Base):
 
 class property_data(Base):
     __table__ = Table('property_data', metadata, autoload=True)
-
-
-    

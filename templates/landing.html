@@ -1,5 +1,20 @@
 {% extends 'base.html' %}
-{% block title %}Page not Found{% endblock %}
+{% block title %}Home{% endblock %}
 {% block content %}
-<h1>Test</h1>
+<h1 style="color: #000000; text-align: center;">Welcome to HouseHunter</h1>
+<p style="color: #000000; text-align: center; margin-left: 20%; margin-right: 20%">
+    HouseHunter is a project created by Alex Buckley to make house hunting easier
+    in Gig Harbor, WA.
+    <br><br>
+    I've scraped publicly-available data about ~ 17,000 single family homes from 
+    <a href="https://atip.piercecountywa.gov/app/parcelSearch/search" target="_blank" style="color:#ea4089;">
+        Pierce County property records</a>.
+    The goal of this project is to create a searchable database about prospective houses to buy.
+    <br><br>
+    The source code is available on my <a href="https://github.com/buckleya2/HouseHunter" target="_blank" style="color:#ea4089;">
+        Github</a>
+    <br><br>
+    Web hosting is provided from <a href="https://www.pythonanywhere.com/" target="_blank" style="color:#ea4089;">
+        Python Anywhere</a>
+</p>
 {% endblock %}

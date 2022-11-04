@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% block title %}About{% endblock %} 
+{% block content %} 
+<div class="sidebyside">
+<img src="{{ url_for('static', filename = 'AB.logo.png') }}" style="margin-left: 10%">
+  <div><p style="color: #000000; text-align: center; padding:20px;">
+    Alex Buckley, PhD is a Data Enthusiast who loves crushing huge datasets, uncovering anomalies and bugs, and data visualizations.
+    <br>
+    <br>
+    I'm currently open to new employment opportunities, for more information about my analysis chops, please visit my
+    <a style="font-size: 30px;" href="https://www.linkedin.com/in/alexandra-buckley/" target="_blank">Linkedin</a>
+</div>
+</div>
+{% endblock %}
