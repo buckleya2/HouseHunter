@@ -1,5 +1,5 @@
 # gpd.GeoDataFrame for Gig Harbor
-MAP_JSON = '/Users/abuckley/Documents/flask/data/301022_tax_parcel.geojson'
+MAP_JSON = '/Users/abuckley/Documents/flask/data/tax_parcel.geojson'
 
 # centered latitude and longitude coordinates for Gig Harbor
 COORDS = (47.31476173672931, -122.61719553658574)
